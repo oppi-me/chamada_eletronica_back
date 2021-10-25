@@ -7,6 +7,8 @@ import numpy as np
 from PIL import Image, UnidentifiedImageError
 
 from chamada_eletronica.settings import BASE_DIR
+
+
 # from .utils import image2gray
 
 

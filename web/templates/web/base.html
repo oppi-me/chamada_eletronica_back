@@ -18,7 +18,7 @@
     {% if messages %}
       <div class="container-xl">
         {% for message in messages %}
-          <div class="alert alert-{{ message.tags }} mt-2 mb-0">
+          <div class="alert alert-{{ message.tags }} mt-3 mb-0">
             {{ message }}
           </div>
         {% endfor %}
@@ -29,7 +29,9 @@
   </div>
 </div>
 
-<script src="{% static 'web/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
 <script src="{% static 'web/js/tabler.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+{% block script %}{% endblock %}
 </body>
 </html>

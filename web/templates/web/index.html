@@ -9,26 +9,14 @@
         </div>
         <div class="col-auto ms-auto d-print-none">
           <div class="btn-list">
-            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-               data-bs-target="#modal-report">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                   viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                   stroke-linecap="round" stroke-linejoin="round">
+            <a href="{% url 'web/index' %}" class="btn btn-primary d-sm-inline-block">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                   stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
               </svg>
-              Cadastrar Aluno
-            </a>
-            <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-               data-bs-target="#modal-report" aria-label="Create new report">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                   viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
+              Atualizar
             </a>
           </div>
         </div>
@@ -38,156 +26,33 @@
   <div class="page-body">
     <div class="container-xl">
       <div class="row row-deck row-cards">
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-4 col-md-4">
           <div class="card">
             <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="subheader">Sales</div>
-                <div class="ms-auto lh-1">
-                  <div class="dropdown">
-                    <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item active" href="#">Last 7 days</a>
-                      <a class="dropdown-item" href="#">Last 30 days</a>
-                      <a class="dropdown-item" href="#">Last 3 months</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="h1 mb-3">75%</div>
-              <div class="d-flex mb-2">
-                <div>Conversion rate</div>
-                <div class="ms-auto">
-                <span class="text-green d-inline-flex align-items-center lh-1">
-                  7%
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24"
-                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                       stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <polyline points="3 17 9 11 13 15 21 7"></polyline>
-                    <polyline points="14 7 21 7 21 14"></polyline>
-                  </svg>
-                </span>
-                </div>
-              </div>
-              <div class="progress progress-sm">
-                <div class="progress-bar bg-blue" style="width: 75%" role="progressbar"
-                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                  <span class="visually-hidden">75% Complete</span>
-                </div>
-              </div>
+              <div class="subheader">Alunos Presentes</div>
+              <div class="h1 mb-3">10</div>
             </div>
           </div>
         </div>
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-4 col-md-4">
           <div class="card">
             <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="subheader">Revenue</div>
-                <div class="ms-auto lh-1">
-                  <div class="dropdown">
-                    <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item active" href="#">Last 7 days</a>
-                      <a class="dropdown-item" href="#">Last 30 days</a>
-                      <a class="dropdown-item" href="#">Last 3 months</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <div class="h1 mb-0 me-2">$4,300</div>
-                <div class="me-auto">
-                <span class="text-green d-inline-flex align-items-center lh-1">
-                  8%
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24"
-                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                       stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <polyline points="3 17 9 11 13 15 21 7"></polyline>
-                    <polyline points="14 7 21 7 21 14"></polyline>
-                  </svg>
-                </span>
-                </div>
-              </div>
-            </div>
-            <div id="chart-revenue-bg" class="chart-sm"></div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="subheader">New clients</div>
-                <div class="ms-auto lh-1">
-                  <div class="dropdown">
-                    <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item active" href="#">Last 7 days</a>
-                      <a class="dropdown-item" href="#">Last 30 days</a>
-                      <a class="dropdown-item" href="#">Last 3 months</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <div class="h1 mb-3 me-2">6,782</div>
-                <div class="me-auto">
-                <span class="text-yellow d-inline-flex align-items-center lh-1">
-                  0%
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24"
-                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                       stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                </span>
-                </div>
-              </div>
-              <div id="chart-new-clients" class="chart-sm"></div>
+              <div class="subheader">Taxa de Presença (do turno)</div>
+              <div class="h1 mb-3">25%</div>
             </div>
           </div>
         </div>
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-4 col-md-4">
           <div class="card">
             <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="subheader">Active users</div>
-                <div class="ms-auto lh-1">
-                  <div class="dropdown">
-                    <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item active" href="#">Last 7 days</a>
-                      <a class="dropdown-item" href="#">Last 30 days</a>
-                      <a class="dropdown-item" href="#">Last 3 months</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <div class="h1 mb-3 me-2">2,986</div>
-                <div class="me-auto">
-                <span class="text-green d-inline-flex align-items-center lh-1">
-                  4%
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24"
-                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                       stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <polyline points="3 17 9 11 13 15 21 7"></polyline>
-                    <polyline points="14 7 21 7 21 14"></polyline>
-                  </svg>
-                </span>
-                </div>
-              </div>
-              <div id="chart-active-users" class="chart-sm"></div>
+              <div class="subheader">Alunos Cadastrados</div>
+              <div class="h1 mb-3">{{ students_total }}</div>
             </div>
           </div>
         </div>
-        <div class="col-12">
+      </div>
+      <div class="row row-cards mt-0">
+        <div class="col-12 col-md-8">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Totens</h3>
@@ -197,27 +62,96 @@
                 <thead>
                 <tr>
                   <th>Endereço MAC</th>
-                  <th>Modo</th>
+                  <th>Endereço IP</th>
                   <th>CPF</th>
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>00:00:00:00:00:00</td>
-                  <td>Cadastrando</td>
-                  <td class="w-25">
-                    <input type="text" class="form-control" name="example-text-input" placeholder="CPF">
-                  <td class="text-end w-25">
-                    <button class="btn align-text-top">Parar Cadastro</button>
-                  </td>
-                </tr>
+                {% for client in clients %}
+                  <tr>
+                    <td>{{ client.mac_address }}
+                      <form id="form{{ forloop.counter0 }}" action="{% url 'web/capture' %}" method="POST">
+                        {% csrf_token %}
+                        <input form="form{{ forloop.counter0 }}" type="hidden" name="mac_address"
+                               value="{{ client.mac_address }}"/>
+                      </form>
+                    </td>
+                    <td>{{ client.ip }}</td>
+                    <td class="w-25">
+                      <input type="text" class="form-control" name="cpf" form="form{{ forloop.counter0 }}"
+                             {% if client.registering %}disabled{% endif %} placeholder="CPF"
+                             value="{{ client.registering }}"/>
+                    </td>
+                    <td class="text-end w-25">
+                      {% if client.registering %}
+                        <input form="form{{ forloop.counter0 }}" type="hidden" value="true" name="stop"/>
+                        <input form="form{{ forloop.counter0 }}" type="submit" class="btn btn-red align-text-top"
+                               value="Encerrar Captura"/>
+                      {% else %}
+                        <input form="form{{ forloop.counter0 }}" type="submit" class="btn btn-blue align-text-top"
+                               value="Iniciar Captura"/>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Cadastrar Aluno</h3>
+            </div>
+            <div class="card-body">
+              <form method="POST" action="{% url 'web/register' %}">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                  <label for="name" class="form-label required">Nome Completo</label>
+                  <input type="text" id="name" name="name" required class="form-control" placeholder="Digite o nome">
+                </div>
+                <div class="form-group mb-3">
+                  <label for="cpf" class="form-label required">CPF</label>
+                  <input type="text" id="cpf" name="cpf" required class="form-control"
+                         placeholder="Digite o CPF do aluno"/>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="enrolment" class="form-label required">Matrícula</label>
+                  <input type="text" id="enrolment" name="enrolment" required class="form-control"
+                         placeholder="Digite a matrícula do aluno"/>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="class" class="form-label required">Turma</label>
+                  <input type="text" id="class" name="class" required class="form-control"
+                         placeholder="Digite a turma do aluno"/>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="shift" class="form-label required">Turno</label>
+                  <select id="shift" name="shift" class="form-select">
+                    <option selected disabled>Selecione</option>
+                    <option value="morning">Manhã</option>
+                    <option value="evening">Tarde</option>
+                    <option value="night">Noite</option>
+                  </select>
+                </div>
+                <div class="form-footer">
+                  <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  {% block script %}
+    <script>
+        $(document).ready(function () {
+            $('[name="cpf"]').mask('000.000.000-00');
+        });
+    </script>
+  {% endblock %}
 {% endblock %}

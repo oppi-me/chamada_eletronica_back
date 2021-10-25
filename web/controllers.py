@@ -14,14 +14,27 @@ from .models import Client, Student
 def ping(request: HttpRequest):
     mac_address = request.POST.get('mac_address', default=None)
 
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
     if mac_address is None or not utils.is_valid_mac_address(mac_address):
         return HttpResponseBadRequest()
 
-    mac_address = utils.sanitize(mac_address)
+    mac_address = utils.normalize_mac_address(mac_address)
 
     try:
-        Client.objects.create(mac_address=mac_address)
+        Client.objects.create(mac_address=mac_address, ip=ip)
     except IntegrityError:
+        pass
+
+    try:
+        client = Client.objects.get(mac_address=mac_address)
+        client.ip = ip
+        client.save()
+    except Client.DoesNotExist:
         pass
 
     return HttpResponse()
@@ -68,8 +81,11 @@ def register(request: HttpRequest):
     else:
         return HttpResponseForbidden()
 
-    mac_address = utils.sanitize(mac_address)
-    client = Client.objects.get(mac_address=mac_address)
+    try:
+        mac_address = utils.normalize_mac_address(mac_address)
+        client = Client.objects.get(mac_address=mac_address)
+    except Client.DoesNotExist:
+        return JsonResponse({'erro': 'Totem não cadastrado no banco de dados.'}, status=403)
 
     if client.registering is None or request.content_type is None:
         return HttpResponse()

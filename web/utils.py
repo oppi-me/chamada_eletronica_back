@@ -43,3 +43,9 @@ def is_valid_cpf(cpf: str) -> bool:
 def is_valid_mac_address(mac_address: str) -> bool:
     pattern = r'^([0-9A-Fa-f]{2}[:\-.]?){5}[0-9A-Fa-f]{2}$'
     return bool(re.match(pattern, mac_address))
+
+
+def sanitize(string: str) -> str:
+    for r in ['.', '-', ':']:
+        string = string.replace(r, '')
+    return string

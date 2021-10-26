@@ -1,28 +1,21 @@
-import io
 import os.path
 import pickle
 
 import face_recognition
 import numpy as np
-from PIL import Image, UnidentifiedImageError
 
 from chamada_eletronica.settings import BASE_DIR
-
-
 # from .utils import image2gray
+from recognition import utils
 
 
 def recognition_face(image_data: bytes):
-    try:
-        image = Image.open(io.BytesIO(image_data))
-    except UnidentifiedImageError:
-        raise Exception('Formato inválido.')
-
+    image = utils.binary2image(image_data)
     # image = image2gray(image)
 
     results = __predict(np.asarray(image))
 
-    return results if len(results) > 0 else None
+    return results
 
 
 def __predict(image,

@@ -1,6 +1,26 @@
 import re
 
 
+def get_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
+    return ip
+
+
+def get_mac_address(request):
+    if 'x-mac-address' in request.headers:
+        mac_address = request.headers['x-mac-address']
+        mac_address = __normalize_mac_address(mac_address)
+    else:
+        mac_address = ''
+
+    return mac_address
+
+
 def is_valid_cpf(cpf: str) -> bool:
     if not cpf.isdigit():
         cpf = ''.join(re.findall(r'\d', cpf))
@@ -24,8 +44,18 @@ def is_valid_cpf(cpf: str) -> bool:
 
     s = cpf[:9]
 
-    s.append(_gen(s))
-    s.append(_gen(s))
+    for _ in range(2):
+        res = []
+        for i, a in enumerate(s):
+            b = len(s) + 1 - i
+            res.append(b * a)
+
+        res = sum(res) % 11
+
+        if res > 1:
+            s.append(11 - res)
+        else:
+            s.append(0)
 
     return s == cpf[:]
 
@@ -35,7 +65,7 @@ def is_valid_mac_address(mac_address: str) -> bool:
     return bool(re.match(pattern, mac_address))
 
 
-def normalize_mac_address(mac_address: str) -> str:
+def __normalize_mac_address(mac_address: str) -> str:
     for r in ['.', '-', ':']:
         mac_address = mac_address.replace(r, '')
 
@@ -50,19 +80,3 @@ def sanitize(string: str) -> str:
     for r in ['.', '-', ':']:
         string = string.replace(r, '')
     return string
-
-
-def _gen(cpf):
-    """Gera o próximo dígito do número de CPF
-    """
-    res = []
-    for i, a in enumerate(cpf):
-        b = len(cpf) + 1 - i
-        res.append(b * a)
-
-    res = sum(res) % 11
-
-    if res > 1:
-        return 11 - res
-    else:
-        return 0

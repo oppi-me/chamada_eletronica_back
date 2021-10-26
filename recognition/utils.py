@@ -1,19 +1,22 @@
+import io
 import mimetypes
 from typing import Union
 
 import face_recognition
 import numpy as np
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
+
+from recognition.errors import InvalidImageBinaryError, InvalidImageExtensionError
 
 
 def image_extension(content_type: str) -> Union[str, None]:
     if content_type not in ['image/jpeg', 'image/png']:
-        return None
+        raise InvalidImageExtensionError
 
     return mimetypes.guess_extension(content_type)
 
 
-def has_valid_face(image: Image.Image) -> bool:
+def number_of_faces(image: Image.Image):
     # image = image.convert('RGB')
     width, height = image.size
 
@@ -26,7 +29,19 @@ def has_valid_face(image: Image.Image) -> bool:
 
     face_bounding_boxes = face_recognition.face_locations(image)
 
-    return not len(face_bounding_boxes) != 1
+    return len(face_bounding_boxes)
+
+
+def binary2image(binary):
+    if binary == b'':
+        raise InvalidImageBinaryError
+
+    try:
+        image = Image.open(io.BytesIO(binary))
+    except UnidentifiedImageError:
+        raise InvalidImageBinaryError
+
+    return image
 
 
 def image2gray(image: Image.Image):

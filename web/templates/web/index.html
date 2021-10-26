@@ -85,7 +85,6 @@
                     </td>
                     <td class="text-end w-25">
                       {% if client.registering %}
-                        <input form="form{{ forloop.counter0 }}" type="hidden" value="true" name="stop"/>
                         <input form="form{{ forloop.counter0 }}" type="submit" class="btn btn-red align-text-top"
                                value="Encerrar Captura"/>
                       {% else %}

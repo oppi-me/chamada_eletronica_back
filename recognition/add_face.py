@@ -1,33 +1,21 @@
 import filecmp
-import io
 import os
 import uuid
 
-from PIL import Image, UnidentifiedImageError
-
 from chamada_eletronica.settings import BASE_DIR
-from .utils import image_extension, has_valid_face, image2gray
+from . import utils
+from .errors import InvalidImageForTrainingError, RepeatedImageError
 
 
 def add_face(id: str, image_data: bytes, content_type: str):
-    if image_data == b'':
-        raise Exception('Imagem vazia.')
-
-    extension = image_extension(content_type)
-
-    if extension is None:
-        raise Exception('Extensão de imagem não aceita.')
+    extension = utils.image_extension(content_type)
 
     __save_image(image_data, extension, id)
 
 
 def __save_image(image_data: bytes, ext: str, id: str) -> None:
-    try:
-        image: Image.Image = Image.open(io.BytesIO(image_data))
-    except UnidentifiedImageError:
-        raise Exception('Formato inválido.')
-
-    image = image2gray(image)
+    image = utils.binary2image(image_data)
+    image = utils.image2gray(image)
 
     directory = os.path.join(BASE_DIR, 'static', id)
 
@@ -39,8 +27,8 @@ def __save_image(image_data: bytes, ext: str, id: str) -> None:
     name = str(len(images_in_dir) + 1) + ext
     definitive_image_path = os.path.join(directory, name)
 
-    if not has_valid_face(image):
-        raise Exception('Nenhum ou mais de um rosto foi encontrado na imagem.')
+    if utils.number_of_faces(image) != 1:
+        raise InvalidImageForTrainingError
 
     if len(images_in_dir) > 0:
         temp_name = 'temp-' + str(uuid.uuid4().hex) + ext
@@ -53,7 +41,7 @@ def __save_image(image_data: bytes, ext: str, id: str) -> None:
 
             if filecmp.cmp(temp_image_path, image_to_compare_path, shallow=False):
                 os.remove(temp_image_path)
-                raise Exception('Imagem repetida.')
+                raise RepeatedImageError
 
         os.rename(temp_image_path, definitive_image_path)
 

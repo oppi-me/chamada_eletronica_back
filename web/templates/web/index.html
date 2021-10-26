@@ -80,7 +80,7 @@
                     <td>{{ client.ip }}</td>
                     <td class="w-25">
                       <input type="text" class="form-control" name="cpf" form="form{{ forloop.counter0 }}"
-                             {% if client.registering %}disabled{% endif %} placeholder="CPF"
+                             {% if client.registering %}readonly{% endif %} placeholder="CPF"
                              value="{{ client.registering }}"/>
                     </td>
                     <td class="text-end w-25">

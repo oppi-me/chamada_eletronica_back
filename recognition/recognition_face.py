@@ -5,13 +5,11 @@ import face_recognition
 import numpy as np
 
 from chamada_eletronica.settings import BASE_DIR
-# from .utils import image2gray
 from recognition import utils
 
 
 def recognition_face(image_data: bytes):
     image = utils.binary2image(image_data)
-    # image = image2gray(image)
 
     results = __predict(np.asarray(image))
 

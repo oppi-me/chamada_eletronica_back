@@ -6,8 +6,13 @@ import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
 from sklearn import neighbors
 
+from chamada_eletronica.settings import BASE_DIR
 
-def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree', verbose=False):
+
+def train(train_dir=os.path.join(BASE_DIR, 'static'),
+          n_neighbors=1,
+          knn_algo='ball_tree',
+          verbose=False):
     x = []
     y = []
 
@@ -43,15 +48,13 @@ def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree
     knn_clf = neighbors.KNeighborsClassifier(n_neighbors=n_neighbors, algorithm=knn_algo, weights='distance')
     knn_clf.fit(x, y)
 
-    # Save the trained KNN classifier
-    if model_save_path is not None:
-        with open(model_save_path, 'wb') as f:
-            pickle.dump(knn_clf, f)
+    with open(os.path.join(train_dir, 'trained_knn_model.clf'), 'wb') as f:
+        pickle.dump(knn_clf, f)
 
     return knn_clf
 
 
 if __name__ == "__main__":
     print("Treinando classificador KNN...")
-    train("../static", model_save_path="../static/trained_knn_model.clf", n_neighbors=1)
+    train(n_neighbors=1)
     print("Treinamento Completo!")

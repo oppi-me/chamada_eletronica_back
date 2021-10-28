@@ -269,8 +269,9 @@ def __training(is_training):
         face_train()
         students = Student.objects.all().filter(training=False)
         for student in students:
-            student.training = True
-            student.save()
+            if student.photos > 0:
+                student.training = True
+                student.save()
 
     except Exception:
         pass

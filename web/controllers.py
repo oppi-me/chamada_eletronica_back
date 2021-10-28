@@ -21,7 +21,6 @@ def ping(request: HttpRequest):
 
     client = Client.objects.get_or_create(mac_address=mac_address)[0]
 
-
     client.ip = ip
     client.save()
 

@@ -1,7 +1,6 @@
 .idea/
 .vscode/
-static/**
-static/*.clf
+static/*
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

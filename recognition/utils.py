@@ -1,23 +1,35 @@
 import io
 import mimetypes
-from typing import Union
 
 import face_recognition
 import numpy as np
-from PIL import Image, UnidentifiedImageError
-
-from recognition.errors import InvalidImageBinaryError, InvalidImageExtensionError
+from PIL import Image
 
 
-def image_extension(content_type: str) -> Union[str, None]:
-    if content_type not in ['image/jpeg', 'image/png']:
-        raise InvalidImageExtensionError
+def binary2image(binary):
+    return Image.open(io.BytesIO(binary))
 
+
+def rgba2rgb(image):
+    image_rgb = Image.new('RGB', image.size, (255, 255, 255))
+    image_rgb.paste(image, mask=image.getchannel('A'))
+
+    return image_rgb
+
+
+def image2array(image):
+    return np.asarray(image)
+
+
+def image2gray(image):
+    return image.convert(mode='L')
+
+
+def image_extension(content_type: str):
     return mimetypes.guess_extension(content_type)
 
 
-def number_of_faces(image: Image.Image):
-    # image = image.convert('RGB')
+def number_of_faces(image):
     width, height = image.size
 
     if width > 450 or height > 450:
@@ -25,31 +37,6 @@ def number_of_faces(image: Image.Image):
         new_size = (int(450 * ratio), 450)
         image = image.resize(new_size)
 
-    image = np.array(image)
-
-    face_bounding_boxes = face_recognition.face_locations(image)
+    face_bounding_boxes = face_recognition.face_locations(image2array(image))
 
     return len(face_bounding_boxes)
-
-
-def binary2image(binary):
-    if binary == b'':
-        raise InvalidImageBinaryError
-
-    try:
-        image = Image.open(io.BytesIO(binary))
-    except UnidentifiedImageError:
-        raise InvalidImageBinaryError
-
-    return image
-
-
-def image2gray(image: Image.Image):
-    return image.convert(mode='L')
-
-
-def rgba2rgb(image: Image.Image):
-    new_image = Image.new('RGB', image.size, (255, 255, 255))
-    new_image.paste(image, mask=image.getchannel('A'))
-
-    return new_image

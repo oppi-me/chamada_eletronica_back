@@ -20,20 +20,18 @@ class Student(models.Model):
     shift = models.ForeignKey(Shift, on_delete=models.RESTRICT)
     training = models.BooleanField(default=False)
     photos = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['name']
 
 
-class Client(models.Model):
+class Totem(models.Model):
     mac_address = models.CharField(max_length=12, unique=True)
     ip = models.CharField(max_length=15)
-    created_at = models.DateTimeField(auto_now_add=True)
     student = models.ForeignKey(Student, on_delete=models.RESTRICT, null=True)
 
 
 class Entry(models.Model):
     student = models.ForeignKey(Student, on_delete=models.RESTRICT)
-    client = models.ForeignKey(Client, on_delete=models.RESTRICT)
+    totem = models.ForeignKey(Totem, on_delete=models.RESTRICT)
     created_at = models.DateTimeField(auto_now_add=True)

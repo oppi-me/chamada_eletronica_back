@@ -14,7 +14,7 @@ def get_ip(request):
 def get_mac_address(request):
     if 'x-mac-address' in request.headers:
         mac_address = request.headers['x-mac-address']
-        mac_address = __normalize_mac_address(mac_address)
+        mac_address = sanitize(mac_address)
     else:
         mac_address = ''
 
@@ -63,17 +63,6 @@ def is_valid_cpf(cpf: str) -> bool:
 def is_valid_mac_address(mac_address: str) -> bool:
     pattern = r'^([0-9A-Fa-f]{2}[:\-.]?){5}[0-9A-Fa-f]{2}$'
     return bool(re.match(pattern, mac_address))
-
-
-def __normalize_mac_address(mac_address: str) -> str:
-    for r in ['.', '-', ':']:
-        mac_address = mac_address.replace(r, '')
-
-    mac_address = re.findall(r'(.{2})', mac_address)
-
-    mac_address = ':'.join(mac_address)
-
-    return mac_address
 
 
 def sanitize(string: str) -> str:

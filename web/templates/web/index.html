@@ -39,7 +39,7 @@
           <div class="card">
             <div class="card-body">
               <div class="subheader">Alunos Presentes ({{ current_shift }})</div>
-              <div class="h1 mb-3">{{ entries|length }}/{{ students_entry|length }}</div>
+              <div class="h1 mb-3">{{ entries|length }}/{{ shift_students|length }}</div>
             </div>
           </div>
         </div>
@@ -99,9 +99,8 @@
               </table>
             </div>
             <div class="card-footer d-flex align-items-center">
-              <p class="m-0 text-muted">Mostrando <span>{{ page_obj.object_list|length }}</span> de
-                <span>{{ page_obj.paginator.count }}</span>
-                alunos</p>
+              <p class="m-0 text-muted">Página <span>{{ page_number }}</span> de
+                <span>{{ page_obj.paginator.num_pages }}</span></p>
               <ul class="pagination m-0 ms-auto">
                 <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
                   <a class="page-link"
